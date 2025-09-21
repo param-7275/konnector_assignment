@@ -24,7 +24,7 @@ A Ruby on Rails application that provides real-time voice transcription and AI-p
    bundle install
 
 2. **Setup environment variables**
-    Create .env file and set constant otherwise no issue I have added harcoded in summarization_service.rb file.
+    Create .env file and set constant otherwise no issue I have added harcoded in summarization_service.rb file. I know is not a best practice to add API_key directly and harcoded, but I have added only for the testing code.
 
     OPENAI_API_KEY=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
 
