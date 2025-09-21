@@ -72,8 +72,11 @@ A Ruby on Rails application that provides real-time voice transcription and AI-p
  GET        `localhost:3000`           Main transcription page 
 
  POST       `/transcriptions`          Create new transcription 
+
  GET        `/transcriptions/:id`      Get a transcription with id 
+
  GET        `/transcriptions`          List all transcriptions 
+ 
  DELETE     `/transcriptions/:id`      Delete a transcription 
 
  GET        `/sidekiq`                 Sidekiq web interface 
