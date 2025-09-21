@@ -1,41 +1,112 @@
-# README
+# Voice Transcription & Summarization Web App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Ruby on Rails application that provides real-time voice transcription and AI-powered summarization using OpenAI's GPT-4o-mini model.
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+1. **Real-time Voice Transcription** - Live speech-to-text using Web Speech API
+2. **AI-Powered Summarization** - Automatic summary generation using OpenAI GPT-4o-mini
+3. **Background Processing** - Non-blocking summarization with Sidekiq
+4. **Modern UI** - Clean interface with Stimulus.js for interactivity
+5. **RESTful API** - JSON endpoints for transcription management
 
-* System dependencies
+## Quick Start
 
-* Configuration
+### Prerequisites
+- Ruby 3.3.4
+- Rails 7.1.5+
+- Chrome browser (for Web Speech API)
+- OpenAI API key
 
-* Database creation
+### Installation
 
-* Database initialization
+1. **Install dependencies**
+   bundle install
 
-* How to run the test suite
+2. **Setup environment variables**
+    Create .env file(Currently setup in project directory) 
+    OPENAI_API_KEY=sk-your-openai-api-key-here > .env
 
-* Services (job queues, cache servers, search engines, etc.)
+3. **Setup database**
+   rails db:create db:migrate
 
-* Deployment instructions
+4. **Start the application**
+   # Terminal 1: Start Rails server
+   bundle exec rails server
+   
+   # Terminal 2: Start Sidekiq server
+   bundle exec sidekiq (check redis is installed or not)
 
-* ...
+5. **Open in browser**
+   http://localhost:3000
 
-# Transcribe Assignment (Rails)
+## How to Use
 
-## Setup
-1. Install gems: `bundle install`
-2. Set OPENAI_API_KEY: `export OPENAI_API_KEY="sk-..."`
-3. DB: `rails db:create db:migrate`
-4. Run server: `bin/rails server`
-5. Open: http://localhost:3000/transcribe (use Chrome)
+1. **Start Recording**: Click "Start Listening" button
+2. **Speak**: Your voice will be transcribed in real-time
+3. **Stop Recording**: Click "Stop Listening" button
+4. **View Results**: 
+   - Full transcription appears immediately
+   - AI summary appears after processing (2-5 seconds)
+5. **View All Transcriptions**: Click "Show All Transcriptions" to see all transcriptions
 
-## Tests
-`bundle exec rspec`
+## Architecture
 
-## Notes
-- Uses Web Speech API (Chrome) for live transcription on client.
-- Backend uses OpenAI (`openai` gem) for summarization.
-- To use background worker, configure ActiveJob adapter / start sidekiq.
+### Frontend
+1. **Stimulus.js** - JavaScript framework for interactivity
+2. **Web Speech API** - Browser-based speech recognition
+3. **Real-time Updates** - Live transcription display
+
+### Backend
+1. **Ruby 3.3.4** - Programming language
+1. **Rails 7.1.5** - Web framework
+2. **SQLite** - Database for storing transcriptions
+3. **Sidekiq** - Background job processing
+4. **OpenAI API** - AI summarization service
+
+## API Endpoints
+
+ Method           Endpoint                  Description 
+
+ GET        `localhost:3000`           Main transcription page 
+
+ POST       `/transcriptions`          Create new transcription 
+ GET        `/transcriptions/:id`      Get a transcription with id 
+ GET        `/transcriptions`          List all transcriptions 
+ DELETE     `/transcriptions/:id`      Delete a transcription 
+
+ GET        `/sidekiq`                 Sidekiq web interface 
+
+## Testing
+
+ **Run all tests**
+    bundle exec rspec
+
+ **Run specific test**
+    bundle exec rspec spec/requests/transcriptions_spec.rb
+
+
+### Background Jobs
+  **Queue**: `default`
+  **Adapter**: Sidekiq
+  **Web UI**: http://localhost:3000/sidekiq
+
+
+### Common Issues
+
+1. **"Browser does not support Web Speech API"**
+   - Use Chrome browser
+   - Ensure HTTPS in production
+
+2. **"Summary not ready"**
+   - Check Sidekiq is running
+   - Verify OpenAI API key
+   - Check Sidekiq logs
+
+### Debug Mode
+
+# Check database
+    bundle exec rails c or rails c
+
+
+**Note**: This application requires Chrome browser and microphone permissions for optimal functionality.

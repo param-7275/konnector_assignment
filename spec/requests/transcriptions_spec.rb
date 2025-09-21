@@ -30,11 +30,11 @@ RSpec.describe "Transcriptions API", type: :request do
     get "/transcriptions/#{transcription.id}"
     expect(response).to have_http_status(:ok)
     body = JSON.parse(response.body)
-    expect(body["summary"]).to include("Short summary")
+    expect(body["data"]["attributes"]["summary"]).to eq("Short summary")
   end
 
   it 'shows all transcriptions' do
-    get "/transcriptions"
+    get "/transcriptions", as: :json
     expect(response).to have_http_status(:ok)
     body = JSON.parse(response.body)
     expect(body).to be_an(Array)

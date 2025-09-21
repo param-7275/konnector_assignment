@@ -1,10 +1,22 @@
 class TranscriptionsController < ApplicationController
 
+  # def index
+  #   @transcriptions = Transcription.all
+  #   render :index, status: :ok
+  # end
+  
   def index
     @transcriptions = Transcription.all
-    render :index, status: :ok
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @transcriptions.as_json(only: [:id, :content, :summary, :status, :created_at, :updated_at])
+      end
+    end
   end
-  
+
+
   def create
     @transcription = Transcription.new(transcription_params)
     @transcription.status = "processing"
