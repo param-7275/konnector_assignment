@@ -1,9 +1,4 @@
 class TranscriptionsController < ApplicationController
-
-  # def index
-  #   @transcriptions = Transcription.all
-  #   render :index, status: :ok
-  # end
   
   def index
     @transcriptions = Transcription.all
