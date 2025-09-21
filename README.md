@@ -24,7 +24,10 @@ A Ruby on Rails application that provides real-time voice transcription and AI-p
    bundle install
 
 2. **Setup environment variables**
-    Create .env file(Currently setup in project directory) 
+    Create .env file and set constant otherwise no issue I have added harcoded in summarization_service.rb file.
+
+    OPENAI_API_KEY=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
+
     OPENAI_API_KEY=sk-your-openai-api-key-here > .env
 
 3. **Setup database**
@@ -35,7 +38,7 @@ A Ruby on Rails application that provides real-time voice transcription and AI-p
    bundle exec rails server
    
    # Terminal 2: Start Sidekiq server
-   bundle exec sidekiq (check redis is installed or not)
+   bundle exec sidekiq (check redis is installed or not if not first start the redis server)
 
 5. **Open in browser**
    http://localhost:3000
@@ -59,10 +62,10 @@ A Ruby on Rails application that provides real-time voice transcription and AI-p
 
 ### Backend
 1. **Ruby 3.3.4** - Programming language
-1. **Rails 7.1.5** - Web framework
-2. **SQLite** - Database for storing transcriptions
-3. **Sidekiq** - Background job processing
-4. **OpenAI API** - AI summarization service
+2. **Rails 7.1.5** - Web framework
+3. **SQLite** - Database for storing transcriptions
+4. **Sidekiq** - Background job processing
+5. **OpenAI API** - AI summarization service
 
 ## API Endpoints
 
@@ -95,10 +98,9 @@ A Ruby on Rails application that provides real-time voice transcription and AI-p
 ### Common Issues
 
 1. **"Browser does not support Web Speech API"**
-   - Use Chrome browser
-   - Ensure HTTPS in production
+   - Use Chrome browser and allow microphone permissions
 
-2. **"Summary not ready"**
+2. **"If Summary not ready"**
    - Check Sidekiq is running
    - Verify OpenAI API key
    - Check Sidekiq logs
