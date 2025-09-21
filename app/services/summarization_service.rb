@@ -2,10 +2,8 @@ class SummarizationService
 
   def initialize(content)
     @content = content
-    @client = OpenAI::Client.new(
-      access_token: ENV['OPENAI_API_KEY'] || "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"
-    )
-    end
+    @client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
+  end
 
   def call
     prompt = <<~PROMPT
