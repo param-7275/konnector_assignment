@@ -1,0 +1,24 @@
+<% if @transcription.present? %>
+<table border="1" cellpadding="5" cellspacing="0" style="margin: 0 auto;">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Content</th>
+        <th>Summary</th>
+        <th>Status</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @transcription.id %></td>
+        <td><%= @transcription.content %></td>
+        <td><%= @transcription.summary.nil? ? "Nil" : @transcription.summary  %></td>
+        <td><%= @transcription.status %></td>
+        <td><%= @transcription.created_at.strftime("%d-%m-%Y %H:%M") %></td>
+      </tr>
+    </tbody>
+  </table>
+<% else %>
+  <p>No transcription found</p>
+<% end %>

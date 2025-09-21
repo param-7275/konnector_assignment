@@ -1,0 +1,29 @@
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+
+<div class="container" data-controller="transcribe">
+   <h1>Voice Transcription & Summary</h1>
+  <div style="margin-bottom: 12px;">
+    <a href="/transcriptions">
+      <button type="button">Show All Transcriptions</button>
+    </a>
+  </div>
+
+  <div style="margin-bottom: 12px;">
+    <button data-action="click->transcribe#start" type="button">Start Listening</button>
+    <button data-action="click->transcribe#stop" type="button">Stop Listening</button>
+  </div>
+
+  <p>Status: <strong data-transcribe-target="status">Idle</strong></p>
+
+  <h3>Live transcription</h3>
+  <div data-transcribe-target="live" style="white-space:pre-wrap; border:1px solid #eee; padding:8px; min-height:80px;"></div>
+
+  <h3>Full transcription</h3>
+  <div data-transcribe-target="final" style="white-space:pre-wrap; border:1px solid #ddd; padding:8px; min-height:80px;"></div>
+
+  <h3>Summary</h3>
+  <div data-transcribe-target="summary" style="white-space:pre-wrap; border:1px solid #ddd; padding:8px; min-height:80px;"></div>
+</div>
+
+<p style="margin-top:20px; font-size:12px; color:#666;">Tip: Use Chrome desktop for best results. Microphone permission required.</p>
